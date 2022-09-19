@@ -2,14 +2,14 @@ import os
 import sys
 from indoor3d_util import DATA_PATH, collect_point_label
 
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))   # ./data_utils
 ROOT_DIR = os.path.dirname(BASE_DIR)
-sys.path.append(BASE_DIR)
+sys.path.append(BASE_DIR)   # path: Pointnet_Pointnet2_pytorch
 
 anno_paths = [line.rstrip() for line in open(os.path.join(BASE_DIR, 'meta/anno_paths.txt'))]
 anno_paths = [os.path.join(DATA_PATH, p) for p in anno_paths]
 
-output_folder = os.path.join(ROOT_DIR, 'data/stanford_indoor3d')
+output_folder = os.path.join(ROOT_DIR, 'data/stanford_indoor3d')    # data/stsanford_indoor3d
 if not os.path.exists(output_folder):
     os.mkdir(output_folder)
 
