@@ -54,7 +54,7 @@ class SOUTHDataset(Dataset):
         points = self.room_points[room_idx]   # N * 6
         labels = self.room_labels[room_idx]   # N
         N_points = points.shape[0]
-        print('11111111')
+        # print('11111111')
 
         while (True):
             center = points[np.random.choice(N_points)][:3]
@@ -62,18 +62,18 @@ class SOUTHDataset(Dataset):
             block_max = center + [self.block_size / 2.0, self.block_size / 2.0, 0]
             point_idxs = np.where((points[:, 0] >= block_min[0]) & (points[:, 0] <= block_max[0]) & (points[:, 1] >= block_min[1]) & (points[:, 1] <= block_max[1]))[0]
             if point_idxs.size > 1024:
-                print('11111122')
+                # print('11111122')
                 break
 
         if point_idxs.size >= self.num_point:
-            print('11112222')
+            # print('11112222')
             selected_point_idxs = np.random.choice(point_idxs, self.num_point, replace=False)
         else:
-            print('22222222')
+            # print('22222222')
             selected_point_idxs = np.random.choice(point_idxs, self.num_point, replace=True)
 
         # normalize
-        print('1111144444')
+        # print('1111144444')
         selected_points = points[selected_point_idxs, :]  # num_point * 6
         current_points = np.zeros((self.num_point, 9))  # num_point * 9
         current_points[:, 6] = selected_points[:, 0] / self.room_coord_max[room_idx][0]
@@ -84,9 +84,9 @@ class SOUTHDataset(Dataset):
         selected_points[:, 3:6] /= 255.0
         current_points[:, 0:6] = selected_points
         current_labels = labels[selected_point_idxs]
-        print('11115555')
+        # print('11115555')
         if self.transform is not None:
-            print('11116666')
+            # print('11116666')
             current_points, current_labels = self.transform(current_points, current_labels)
         return current_points, current_labels
 

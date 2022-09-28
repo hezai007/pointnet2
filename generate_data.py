@@ -36,8 +36,11 @@ for scene in scenes:
     print(scene_path)
     data_label = np.loadtxt(scene_path)
     xyz_min = np.amin(data_label, axis=0)[0:3]
+    xyz_max = np.amax(data_label, axis=0)[0:3]
+    print("xyzmin, xyzmax:", xyz_min, xyz_max)
     data_label[:, 0:3] -= xyz_min
     data_label = normalized(data_label)
+    print(np.amin(data_label, axis=0), np.amax(data_label, axis=0))
     with open(os.path.join(output_folder, scene), 'w') as f:
         np.savetxt(f, data_label)
     print('Already saved scene {}'.format(scene))
